@@ -1,0 +1,69 @@
+# React Components Guidelines
+
+## Component Structure
+- Use functional components with TypeScript
+- Export components as named exports (not default)
+- Place components in appropriate directories:
+  - `~/components/ui` for Shadcn UI components
+  - `~/features` for feature-specific components
+  - `~/components` for shared components
+
+## Props and Types
+- Always define TypeScript interfaces for props
+- Use descriptive prop names
+- Provide default values when appropriate
+- Use `React.ComponentProps` for extending HTML elements
+
+## State Management
+- Prefer `useState` for local component state
+- Use `useEffect` for side effects
+- Keep state as close to where it's used as possible
+- Use custom hooks for reusable state logic
+
+## Styling
+- Use Tailwind CSS classes exclusively
+- Follow Shadcn UI design patterns
+- Use `cn()` utility for conditional classes
+- Maintain consistent spacing and sizing
+
+## Performance
+- Use `React.memo()` for expensive components
+- Implement proper dependency arrays in `useEffect`
+- Avoid inline object/function creation in render
+- Use `useCallback` and `useMemo` when beneficial
+
+## Examples
+
+### Good Component Structure:
+```typescript
+interface ComponentProps {
+  title: string;
+  onAction?: () => void;
+  variant?: "default" | "outline";
+}
+
+export function Component({ 
+  title, 
+  onAction, 
+  variant = "default" 
+}: ComponentProps) {
+  const [state, setState] = useState(false);
+  
+  useEffect(() => {
+    // Side effects here
+  }, []);
+  
+  return (
+    <div className={cn(
+      "base-classes",
+      variant === "outline" && "outline-classes"
+    )}>
+      {title}
+    </div>
+  );
+}
+```
+description:
+globs:
+alwaysApply: false
+---

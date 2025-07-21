@@ -1,0 +1,63 @@
+# TypeScript Guidelines
+
+## Type Definitions
+- Always define explicit types for function parameters and return values
+- Use interfaces for object shapes, types for unions/primitives
+- Prefer `interface` over `type` for object definitions
+- Use descriptive type names with PascalCase
+
+## Import/Export
+- Use `~` alias for imports from project root
+- Group imports: React, external libraries, internal modules, types
+- Use named exports for components and utilities
+- Use default exports only for route modules
+
+## Type Safety
+- Avoid `any` type - use `unknown` or proper typing
+- Use type guards for runtime type checking
+- Leverage TypeScript's strict mode features
+- Use utility types like `Partial<T>`, `Pick<T>`, `Omit<T>`
+
+## React Router 7 Specific
+- Use `'react-router'` imports, not `'react-router-dom'`
+- Define proper types for route parameters
+- Use typed hooks like `useParams<T>()`
+- Export route components as default functions
+
+## Examples
+
+### Good Type Definitions:
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+}
+
+type UserRole = 'admin' | 'user' | 'guest';
+
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+// Function with proper typing
+function fetchUser(id: string): Promise<ApiResponse<User>> {
+  // Implementation
+}
+```
+
+### Route Module Example:
+```typescript
+import { TasksList } from "~/features/tasks/tasks-list";
+
+export default function TasksRoute() {
+  return <TasksList />;
+}
+```
+description:
+globs:
+alwaysApply: false
+---

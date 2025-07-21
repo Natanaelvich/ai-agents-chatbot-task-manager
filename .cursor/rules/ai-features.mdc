@@ -1,0 +1,86 @@
+# AI Features and Chatbot Guidelines
+
+## Chat Interface Structure
+- Use `Message` type with `id`, `content`, `role`, and `timestamp`
+- Implement proper message threading and history
+- Use optimistic updates for better UX
+- Handle loading states with typing indicators
+
+## Message Handling
+- Validate input before sending
+- Implement proper error handling
+- Use debouncing for real-time features
+- Maintain message order and consistency
+
+## AI Integration Patterns
+- Separate AI logic from UI components
+- Use proper TypeScript types for AI responses
+- Implement fallback responses for errors
+- Cache AI responses when appropriate
+
+## State Management for AI
+- Use `useState` for message history
+- Implement proper loading states
+- Handle streaming responses if applicable
+- Maintain conversation context
+
+## Examples
+
+### Message Type Definition:
+```typescript
+interface Message {
+  id: string;
+  content: string;
+  role: "user" | "assistant";
+  timestamp: Date;
+}
+
+interface ChatState {
+  messages: Message[];
+  isLoading: boolean;
+  error: string | null;
+}
+```
+
+### Chat Interface Pattern:
+```typescript
+export function ChatInterface() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const handleSendMessage = async (content: string) => {
+    if (!content.trim()) return;
+    
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content,
+      role: "user",
+      timestamp: new Date(),
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+    
+    try {
+      // AI processing here
+      const aiResponse = await processAIRequest(content);
+      // Add AI response to messages
+    } catch (error) {
+      // Handle error
+    } finally {
+      setIsLoading(false);
+    }
+  };
+}
+```
+
+## Best Practices
+- Always provide user feedback during AI processing
+- Implement proper error boundaries
+- Use consistent message formatting
+- Maintain accessibility standards
+- Test AI responses thoroughly
+description:
+globs:
+alwaysApply: false
+---
