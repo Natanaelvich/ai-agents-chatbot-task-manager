@@ -24,6 +24,11 @@ This project uses Cursor Rules to maintain consistent code quality and developme
 - **Applies to**: Chat interface and AI-related files
 - **Purpose**: Message handling, AI integration patterns
 
+### 5. `commit-guidelines.mdc` - Commit Guidelines
+- **Scope**: Git commits and version control
+- **Applies to**: All files (always apply)
+- **Purpose**: Commit structure, grouping rules, message formatting
+
 ## 🎯 How to Use
 
 1. **Automatic Application**: Rules are automatically applied when editing files
@@ -59,8 +64,9 @@ alwaysApply: true/false
 ## 🔧 Rule Priorities
 
 1. **Project Rules** (highest priority)
-2. **File-Specific Rules** (medium priority)
-3. **Feature-Specific Rules** (contextual priority)
+2. **Commit Guidelines** (high priority - always apply)
+3. **File-Specific Rules** (medium priority)
+4. **Feature-Specific Rules** (contextual priority)
 
 ## 📚 Best Practices
 

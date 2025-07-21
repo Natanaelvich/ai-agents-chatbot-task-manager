@@ -1,0 +1,171 @@
+# Commit Guidelines
+
+## Commit Structure
+All commits must follow the conventional commit format:
+```
+<type>(<scope>): <description>
+
+<body>
+
+<footer>
+```
+
+## Commit Types
+- **feat**: New feature or enhancement
+- **fix**: Bug fix or correction
+- **docs**: Documentation changes
+- **style**: Code style changes (formatting, semicolons, etc.)
+- **refactor**: Code refactoring without functional changes
+- **test**: Adding or updating tests
+- **chore**: Maintenance tasks, dependencies, build changes
+- **perf**: Performance improvements
+- **ci**: CI/CD changes
+- **build**: Build system changes
+
+## Commit Scope
+Use scopes to indicate which part of the application is affected:
+- **ui**: User interface components
+- **api**: API-related changes
+- **auth**: Authentication features
+- **chat**: Chat interface and AI features
+- **tasks**: Task management features
+- **routing**: Route changes
+- **types**: TypeScript type definitions
+- **config**: Configuration files
+
+## Commit Grouping Rules
+
+### ✅ Group Related Changes Together
+When multiple files are part of the same logical change, commit them together:
+
+**Example 1 - Feature Implementation:**
+```bash
+# ✅ Good: Related files for a new feature
+git add app/features/tasks/task-form.tsx
+git add app/features/tasks/task-types.ts
+git add app/routes/task-new.tsx
+git commit -m "feat(tasks): add new task creation form
+
+- Add TaskForm component with validation
+- Add TypeScript types for task data
+- Add route for task creation page
+- Implement form submission handling"
+```
+
+**Example 2 - Bug Fix Across Files:**
+```bash
+# ✅ Good: Fix affecting multiple components
+git add app/components/chat-interface.tsx
+git add app/features/tasks/tasks-chatbot.tsx
+git commit -m "fix(chat): resolve message display issues
+
+- Fix message alignment in chat interface
+- Update chatbot layout to prevent overflow
+- Ensure consistent spacing between messages"
+```
+
+### ❌ Don't Group Unrelated Changes
+Keep unrelated changes in separate commits:
+
+```bash
+# ❌ Bad: Unrelated changes in one commit
+git add app/components/header.tsx
+git add app/features/auth/login.tsx
+git add package.json
+git commit -m "feat: add header and fix login and update dependencies"
+
+# ✅ Good: Separate commits for different concerns
+git add app/components/header.tsx
+git commit -m "feat(ui): add new site header component"
+
+git add app/features/auth/login.tsx
+git commit -m "fix(auth): resolve login form validation issues"
+
+git add package.json
+git commit -m "chore(deps): update dependencies to latest versions"
+```
+
+## Commit Message Guidelines
+
+### Description
+- Use imperative mood ("add" not "added")
+- Keep under 72 characters
+- Be specific and descriptive
+- Use lowercase
+- No period at the end
+
+### Body
+- Explain what and why, not how
+- Use bullet points for multiple changes
+- Reference issues if applicable
+- Break long lines at 72 characters
+
+### Examples
+
+**Feature Commit:**
+```bash
+git commit -m "feat(chat): implement real-time message typing indicators
+
+- Add typing animation component
+- Show typing status for AI responses
+- Improve user experience with visual feedback
+- Handle typing state management properly"
+```
+
+**Bug Fix Commit:**
+```bash
+git commit -m "fix(tasks): resolve task list rendering issue
+
+- Fix incorrect task order display
+- Update task filtering logic
+- Ensure proper state updates on task completion
+- Closes #123"
+```
+
+**Refactor Commit:**
+```bash
+git commit -m "refactor(components): extract reusable button component
+
+- Create shared Button component
+- Remove duplicate button implementations
+- Improve component reusability
+- Update all button usages to use new component"
+```
+
+## When to Split Commits
+
+### Split When:
+- Changes affect different features
+- Changes have different purposes (feature + bug fix)
+- Changes are in different areas of the codebase
+- One change is ready for review while another needs more work
+
+### Keep Together When:
+- Changes are part of the same logical feature
+- Changes are required for a single feature to work
+- Changes fix the same bug across multiple files
+- Changes are refactoring the same component/feature
+
+## Pre-commit Checklist
+Before committing, ask yourself:
+1. Are all changes related to the same logical change?
+2. Does the commit message clearly describe what was changed?
+3. Are the changes ready for review/deployment?
+4. Would this commit make sense to someone else?
+5. Is the commit focused on a single concern?
+
+## Breaking Changes
+For breaking changes, use the `!` suffix and include migration notes:
+```bash
+git commit -m "feat(api)!: change user authentication endpoint
+
+BREAKING CHANGE: User login endpoint changed from /auth/login to /api/v2/auth/login
+
+- Update authentication service to use new endpoint
+- Add backward compatibility layer
+- Update documentation with new API structure"
+```
+description:
+globs:
+alwaysApply: false
+---
